@@ -1,11 +1,14 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Harbortop</title>
-  </head>
-  <body>
-    <h1>Harbortop</h1>
-    <h2>Curiosity</h2>
-  </body>
-</html>
+---
+layout: default
+title: Harbortop
+character: ["Curiosity", "Zest", "Social Intelligence", "Grattitude", "Optimism", "Self Control", "Grit"]
+---
+<div class="row">
+  <div class="col-3">
+    <img src="assets/images/lighthouse_color.jpg" class="img-fluid" alt="Responsive image">
+  </div>
+  <div class="col">
+    <h1>{{ "harbortop" | capitalize }}</h1>
+  </div>
+</div>
+<h2>{{ page.character | sample }}</h2>
