@@ -1,0 +1,29 @@
+
+
+h1.title-one {
+  color: lightgray;
+  font-weight: 200;
+  text-align: center;
+  font-size: 5rem;
+}
+
+img.bottom {
+  vertical-align: bottom;
+}
+
+img.sizing {
+  padding: 15px;
+}
+
+.shit-people {
+  margin-top: 2rem;
+}
+
+.shit-company {
+  margin-top: 2rem;
+  text-align: right;
+}
+
+#modal-footer {
+  justify-content: space-between
+}
