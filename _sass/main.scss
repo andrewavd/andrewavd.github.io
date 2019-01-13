@@ -1,5 +1,7 @@
-.my-name {
-  color: lightgray
+.quote-header {
+  font-family: 'Yellowtail', cursive;
+  font-size: 1.5rem;
+  color: #007BFF;
 }
 
 .blog-header {
@@ -8,26 +10,36 @@
 }
 
 .blog-header-logo {
-  font-size: 1.25rem
+  font-family: 'Lobster', cursive;
+  font-size: 3.0rem;
+  color: #0077BE;
 }
 
-// @media (min-width: 576px) {
+
+.blog-header-logo:hover {
+  text-decoration: none;
+}
+
+// @media (min-width: 415px) {
 //   .blog-header-logo {
-//     font-size: 1.0rem;
+//     font-size: 3.0rem;
+//   }
+//   .quote-header {
+//     display: block;
 //   }
 // }
 
-@media (min-width: 768px) {
-  .blog-header-logo {
-    font-size: 2.0rem;
-  }
-}
-
-@media (min-width: 992px) {
-  .blog-header-logo {
-    font-size: 2.5rem;
-  }
-}
+// @media (min-width: 768px) {
+//   .blog-header-logo {
+//     font-size: 2.0rem;
+//   }
+// }
+//
+// @media (min-width: 992px) {
+//   .blog-header-logo {
+//     font-size: 2.5rem;
+//   }
+// }
 
 .nav-scroller {
   position: relative;
@@ -68,4 +80,18 @@ img.sizing {
 
 #modal-footer {
   justify-content: space-between
+}
+
+/*
+ * Footer
+ */
+.blog-footer {
+  padding: 2.5rem 0;
+  color: #999;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-top: .05rem solid #e5e5e5;
+}
+.blog-footer p:last-child {
+  margin-bottom: 0;
 }

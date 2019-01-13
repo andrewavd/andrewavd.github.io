@@ -1,19 +1,20 @@
-.my-name {
-  color: lightgray; }
+.quote-header {
+  font-family: 'Yellowtail', cursive;
+  font-size: 1.5rem;
+  color: #007BFF; }
 
 .blog-header {
   line-height: 1;
   border-bottom: 1px solid #e5e5e5; }
 
 .blog-header-logo {
-  font-size: 1.25rem; }
+  font-family: 'Lobster', cursive;
+  font-size: 3.0rem;
+  color: #0077BE; }
 
-@media (min-width: 768px) {
-  .blog-header-logo {
-    font-size: 2.0rem; } }
-@media (min-width: 992px) {
-  .blog-header-logo {
-    font-size: 2.5rem; } }
+.blog-header-logo:hover {
+  text-decoration: none; }
+
 .nav-scroller {
   position: relative;
   z-index: 2;
@@ -45,3 +46,16 @@ img.sizing {
 
 #modal-footer {
   justify-content: space-between; }
+
+/*
+ * Footer
+ */
+.blog-footer {
+  padding: 2.5rem 0;
+  color: #999;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-top: .05rem solid #e5e5e5; }
+
+.blog-footer p:last-child {
+  margin-bottom: 0; }
