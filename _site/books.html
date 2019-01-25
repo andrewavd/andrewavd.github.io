@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{{ page.title }}</title>
+    <title>Book Club | Harbortop</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/css/styles.css">
     <!-- fonts -->
@@ -38,12 +38,31 @@
           <a class="p-2 text-muted" href="/diversions.html">Diversions</a>
         </nav>
       </div>
-      {{ content }}
-    </div>
+      <div class="book-search text-center">
+  <h3>BOOK SEARCH</h3>
+</div>
 
-    {%- for js in page.extra_js %}
-      <script src="{{ js }}"></script>
-    {%- endfor %}
+<div class="quote-header text-center">
+  <h5>“Beware of the person of one book.” – Thomas Aquinas</h5>
+</div>
+
+<div class="input-group mt-4">
+  <input type="text" id="bookInput" onfocus="this.value=''" class="form-control" placeholder="Title, Author, ISBN" aria-label="Book search" aria-describedby="basic-addon1">
+  <div class="input-group-append">
+    <button id="bookSearch" onclick="bookSearch()" class="btn btn-primary">Search</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <p class="text-center mt-4">Search comprehensive index of full-text books.</p>
+    </div>
+</div>
+
+<div id="content" class="text-center mt-3"></div>
+
+    </div>
+      <script src="assets/js/books.js"></script>
   </body>
 
   <footer class="blog-footer mt-3">

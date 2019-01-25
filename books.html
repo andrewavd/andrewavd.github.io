@@ -1,0 +1,28 @@
+---
+layout: default
+title: Book Club | Harbortop
+extra_js: "assets/js/books.js"
+---
+
+<div class="book-search text-center">
+  <h3>BOOK SEARCH</h3>
+</div>
+
+<div class="quote-header text-center">
+  <h5>“Beware of the person of one book.” – Thomas Aquinas</h5>
+</div>
+
+<div class="input-group mt-4">
+  <input type="text" id="bookInput" onfocus="this.value=''" class="form-control" placeholder="Title, Author, ISBN" aria-label="Book search" aria-describedby="basic-addon1">
+  <div class="input-group-append">
+    <button id="bookSearch" onclick="bookSearch()" class="btn btn-primary">Search</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <p class="text-center mt-4">Search comprehensive index of full-text books.</p>
+    </div>
+</div>
+
+<div id="content" class="text-center mt-3"></div>
