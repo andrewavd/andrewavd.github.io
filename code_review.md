@@ -112,6 +112,7 @@ Example of `ln 85 - ln 95` restyled:
 ```
 
 ---
+
 **CODE**
 
 *Concerns*
@@ -142,10 +143,9 @@ Example of `ln 85 - ln 95` restyled:
   end
 ```
 
-  - `eval_board` Extract the "strategies" to their own methods. This may be come more critical as the need to meet the game objective of "undefeatable" computer is addressed. Will you atempt to create a hierarchy of ordered strategies or use an algorithm such as "minimax"? (Considering the arguments being passed from `eval_board` and the parameters being accepted by `get_best_move`, it looks like "minimax".)
+  - `eval_board` Extract the "strategies" to their own methods. This may be come more critical as the need to meet the game objective of "undefeatable" computer is addressed. Will you attempt to create a hierarchy of ordered strategies or use an algorithm such as "minimax"? (Considering the arguments being passed from `eval_board` and the parameters being accepted by `get_best_move`, it looks like "minimax".)
 
   - `ln 42` Is there a need to pass the `@com` argument? It does not appear so at this point in the development/functionality of the game. The same question for `ln 52`. `next_player`, `depth`, and `best_score`.
-  -
 
 *Considerations*
 - Hide instance variables, consider "getters" and/or "setters" for instance variables.
@@ -160,6 +160,7 @@ Example of `ln 85 - ln 95` restyled:
 - Consider attempting to refactor `get_best_move` and `game_over` methods to simplify logic.
 
 ---
+
 **OVERALL**
 
 The game has generally met the objectives set forth. The two immediate needs to satisfy the games desired outcomes are: address input that falls outside the choices for choosing a move, and make the computer unbeatable.
