@@ -14,12 +14,13 @@ If you are unfamiliar with a code review I want to assure you the purpose is not
 Following is the breakdown of the requested  outcomes for the Tic Tac Toe game.
 
 **Tic Tac Toe desired outcomes:**
+
 - Game executes without "crashes".
 - Two player game, player one: a human, second player: the computer.
 - Game play should be "pleasant".
   - Assumes the human player understands the rules and objectives of the Tic Tac Toe game and that providing explicit rules pertaining to such is unnecessary.
-  -  Assumes an interface that visually represents the tic tac toe board and its' current state. In other words, the human player should not need to "imagine" the state of the board in their head.
-  -  Assumes that interfaces, both inputs and outputs, shall be properly titled and/or labeled as to indicate their purpose, state, or requirements as necessary.
+  - Assumes an interface that visually represents the tic tac toe board and its' current state. In other words, the human player should not need to "imagine" the state of the board in their head.
+  - Assumes that interfaces, both inputs and outputs, shall be properly titled and/or labeled as to indicate their purpose, state, or requirements as necessary.
 - Game play should be forgiving.
   - Assumes an allowance for human player input that isn't relative to the play of the game.
 - Player represented by computer should be unbeatable.
@@ -27,11 +28,12 @@ Following is the breakdown of the requested  outcomes for the Tic Tac Toe game.
 
 ---
 
-**GAMEPLAY**
+## GAMEPLAY
 
 The core functionality of the tic tac toe game works as expected. The game proceeds until a player wins or there is a draw.
 
 *Concerns:*
+
 - Is it *consistently* apparent when the player should enter their move?
   - Examine `ln 11`. Would relocation to a position where it is executed for each expectation of input by the player be beneficial?
 - What happens if the player makes an entry other than 0 - 8?
@@ -39,6 +41,7 @@ The core functionality of the tic tac toe game works as expected. The game proce
   - Would "validating" the input resolve any unexpected behaviors in `ln 26` and `ln 27`?
 
 *Considerations:*
+
 - Could the player input prompt be clearer? More descriptive? All on one line?
   - `print "==> Please choose a square [0-8]: "`
 - As the game progresses, the number of "boards" on the screen might be confusing to some players, consider "clearing" the terminal screen with each output of the board's state.
@@ -47,6 +50,7 @@ The core functionality of the tic tac toe game works as expected. The game proce
 - Note who's turn it currently is. (See Further Exploration)
 
 *Further Exploration:*
+
 - Humans don't "instinctively" count from zero (0). What would the ramifications be of numbering the squares on the board 1 - 9?
 - To differentiate Human turn from Computer turn, consider introducing an "pause" into the game.
 
@@ -77,11 +81,12 @@ The core functionality of the tic tac toe game works as expected. The game proce
 
 ---
 
-**STYLE**
+## STYLE
 
 Coding style is consistent.
 
 *Considerations:*
+
 - Variable and method naming IS challenging for everyone. Consider the following:
   - `start_game` method. Does a loop in this method suggest more than just the "start" of the game? How about that `start_game` is the only method called on the "game" object? Does the method only "start" the game or is there a process of playing the game as well as an end to the game?  Would `play_game` be more indicative of start, process, and end?
   - Consider using "full" variable names such as `evaluate_board`.
@@ -113,11 +118,15 @@ Example of `ln 85 - ln 95` restyled:
 
 ---
 
-**CODE**
+## CODE
 
-*Concerns*
+### Concerns
+
 - Is it possinble to narrow the focus of the following methods? Can these methods be refactored to a single responsibility?
   - `start_game` (ln 10 & ln 18) Extract the drawing of the board to its own method. Benefit: DRY. Any future changes to the board can now be done in one place.
+  - `eval_board` Extract the "strategies" to their own methods. This may be come more critical as the need to meet the game objective of "undefeatable" computer is addressed. Will you attempt to create a hierarchy of ordered strategies or use an algorithm such as "minimax"? (Considering the arguments being passed from `eval_board` and the parameters being accepted by `get_best_move`, it looks like "minimax".)
+
+  - `ln 42` Is there a need to pass the `@com` argument? It does not appear so at this point in the development/functionality of the game. The same question for `ln 52`. `next_player`, `depth`, and `best_score`.
   - `get_human_spot` (ln 23) Extract the validation of an open square to its own method. As mentioned prior (Gameplay concerns), the game would benefit from validating if the chosen sqaure is in the range of the board (0- 8). Validate if the move is in range, if so, validate if the square is available.
 
 `get_human_spot` refactored:
@@ -143,11 +152,8 @@ Example of `ln 85 - ln 95` restyled:
   end
 ```
 
-  - `eval_board` Extract the "strategies" to their own methods. This may be come more critical as the need to meet the game objective of "undefeatable" computer is addressed. Will you attempt to create a hierarchy of ordered strategies or use an algorithm such as "minimax"? (Considering the arguments being passed from `eval_board` and the parameters being accepted by `get_best_move`, it looks like "minimax".)
+### Considerations
 
-  - `ln 42` Is there a need to pass the `@com` argument? It does not appear so at this point in the development/functionality of the game. The same question for `ln 52`. `next_player`, `depth`, and `best_score`.
-
-*Considerations*
 - Hide instance variables, consider "getters" and/or "setters" for instance variables.
   - `attr_reader :board, :com, :hum`
 - Consider referencing squares by player rather than markers. Easier updates if changes are made to markers. `ln 27`, `ln 43`, `ln 56` and `ln 98`.
@@ -161,7 +167,7 @@ Example of `ln 85 - ln 95` restyled:
 
 ---
 
-**OVERALL**
+## OVERALL
 
 The game has generally met the objectives set forth. The two immediate needs to satisfy the games desired outcomes are: address input that falls outside the choices for choosing a move, and make the computer unbeatable.
 

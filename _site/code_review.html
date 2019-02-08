@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>TTT Review | Harbortop</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Yellowtail" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <!-- fav icon -->
+    <link rel="shortcut icon" href="assets/images/harbortopnotext2.png" type="image/x-icon">
+    <link rel="icon" href="assets/images/harbortopnotext2.png" type="image/x-icon">
+    <!-- js -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container">
+      <header class="blog-header py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+          <div class="col text-center">
+            <a class="blog-header-logo" href="/">Harbortop</a>
+          </div>
+          <!-- <div class="col d-flex justify-content-end align-items-center">
+            <a class="btn btn-sm btn-outline-primary" href="#">Contact</a>
+          </div> -->
+        </div>
+      </header>
+
+      <div class="blog-header nav-scroller py-1 mb-2">
+        <nav class="nav d-flex justify-content-between">
+          <a class="p-2 text-muted" href="/character.html">Character</a>
+          <a class="p-2 text-muted" href="/dev.html">Development/Engineering</a>
+          <a class="p-2 text-muted" href="/education.html">Education</a>
+          <a class="p-2 text-muted" href="/diversions.html">Diversions</a>
+        </nav>
+      </div>
+      <h1 id="tic-tac-toe-code-review-ruby">Tic Tac Toe Code Review (Ruby)</h1>
+
+<p>Hi,</p>
+
+<p>I will be reviewing your code today. <a href="https://github.com/8thlight/legacy_code_examples/blob/master/ruby/game.rb">Tic Tac Toe code can be found here.</a></p>
+
+<p>If you are unfamiliar with a code review I want to assure you the purpose is not to find fault or pass judgement. A code review is useful as a way to offer an alternative perspective on what is often a complex problem with numerous viable paths to its’ solution. The goal is to stimulate thought and discussion on how to proceed to the desired outcome. Ideally, the code review is beneficial to both the reviewer(s) and reviewee(s).</p>
+
+<p>Following is the breakdown of the requested  outcomes for the Tic Tac Toe game.</p>
+
+<p><strong>Tic Tac Toe desired outcomes:</strong></p>
+
+<ul>
+  <li>Game executes without “crashes”.</li>
+  <li>Two player game, player one: a human, second player: the computer.</li>
+  <li>Game play should be “pleasant”.
+    <ul>
+      <li>Assumes the human player understands the rules and objectives of the Tic Tac Toe game and that providing explicit rules pertaining to such is unnecessary.</li>
+      <li>Assumes an interface that visually represents the tic tac toe board and its’ current state. In other words, the human player should not need to “imagine” the state of the board in their head.</li>
+      <li>Assumes that interfaces, both inputs and outputs, shall be properly titled and/or labeled as to indicate their purpose, state, or requirements as necessary.</li>
+    </ul>
+  </li>
+  <li>Game play should be forgiving.
+    <ul>
+      <li>Assumes an allowance for human player input that isn’t relative to the play of the game.</li>
+    </ul>
+  </li>
+  <li>Player represented by computer should be unbeatable.</li>
+  <li>Production ready version of the Tic Tac Toe game.</li>
+</ul>
+
+<hr />
+
+<h2 id="gameplay">GAMEPLAY</h2>
+
+<p>The core functionality of the tic tac toe game works as expected. The game proceeds until a player wins or there is a draw.</p>
+
+<p><em>Concerns:</em></p>
+
+<ul>
+  <li>Is it <em>consistently</em> apparent when the player should enter their move?
+    <ul>
+      <li>Examine <code class="highlighter-rouge">ln 11</code>. Would relocation to a position where it is executed for each expectation of input by the player be beneficial?</li>
+    </ul>
+  </li>
+  <li>What happens if the player makes an entry other than 0 - 8?
+    <ul>
+      <li>Examine <code class="highlighter-rouge">ln 26</code>. What value is <code class="highlighter-rouge">spot</code> assigned to? If the input is “a”? If the input is 9? What affect does that have on the conditional beginning on <code class="highlighter-rouge">ln 27</code>?</li>
+      <li>Would “validating” the input resolve any unexpected behaviors in <code class="highlighter-rouge">ln 26</code> and <code class="highlighter-rouge">ln 27</code>?</li>
+    </ul>
+  </li>
+</ul>
+
+<p><em>Considerations:</em></p>
+
+<ul>
+  <li>Could the player input prompt be clearer? More descriptive? All on one line?
+    <ul>
+      <li><code class="highlighter-rouge">print "==&gt; Please choose a square [0-8]: "</code></li>
+    </ul>
+  </li>
+  <li>As the game progresses, the number of “boards” on the screen might be confusing to some players, consider “clearing” the terminal screen with each output of the board’s state.
+    <ul>
+      <li><code class="highlighter-rouge">system('clear') || system('cls')</code></li>
+    </ul>
+  </li>
+  <li>The player is not explicitly made aware of what marker is theirs. In other words, they need to deduce their marker by examining the board after their first move. Would there be a way of improving playability by explicitly conveying the mark of the player and the computer?</li>
+  <li>Note who’s turn it currently is. (See Further Exploration)</li>
+</ul>
+
+<p><em>Further Exploration:</em></p>
+
+<ul>
+  <li>Humans don’t “instinctively” count from zero (0). What would the ramifications be of numbering the squares on the board 1 - 9?</li>
+  <li>To differentiate Human turn from Computer turn, consider introducing an “pause” into the game.</li>
+</ul>
+
+<p><em>Code example of game pause:</em></p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">def</span> <span class="nf">eval_board</span>
+    <span class="n">thinking</span>
+    <span class="n">spot</span> <span class="o">=</span> <span class="kp">nil</span>
+    <span class="c1"># code removed for brevity</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">thinking</span>
+    <span class="nb">puts</span> <span class="s1">'Computer thinking...'</span>
+    <span class="nb">sleep</span> <span class="mi">1</span>
+  <span class="k">end</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Consider additional features to game
+    <ul>
+      <li>Identify the human by name.</li>
+      <li>Convey the outcome of each game upon its completion.</li>
+      <li>Continue play after each game.</li>
+      <li>Keep score if multiple games are played.</li>
+      <li>Choose your opponent, computers of varying ability or another human.</li>
+    </ul>
+  </li>
+  <li>How might the design of the current code and its data structures benefit from change if some or all of the “Further Exploration” features were added?
+    <ul>
+      <li>Would the game benefit from the creation of more classes?</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="style">STYLE</h2>
+
+<p>Coding style is consistent.</p>
+
+<p><em>Considerations:</em></p>
+
+<ul>
+  <li>Variable and method naming IS challenging for everyone. Consider the following:
+    <ul>
+      <li><code class="highlighter-rouge">start_game</code> method. Does a loop in this method suggest more than just the “start” of the game? How about that <code class="highlighter-rouge">start_game</code> is the only method called on the “game” object? Does the method only “start” the game or is there a process of playing the game as well as an end to the game?  Would <code class="highlighter-rouge">play_game</code> be more indicative of start, process, and end?</li>
+      <li>Consider using “full” variable names such as <code class="highlighter-rouge">evaluate_board</code>.</li>
+      <li>Consider naming methods that return a boolean or “truthy” values with a “?” such as <code class="highlighter-rouge">game_is_over?</code> and <code class="highlighter-rouge">tie?</code></li>
+      <li>Is the <code class="highlighter-rouge">b</code> parameter name descriptive? <code class="highlighter-rouge">ln 85</code>, <code class="highlighter-rouge">ln 97</code>. Will you remember what it refers to in the future? What if the call isn’t only 17 lines away in the future?</li>
+    </ul>
+  </li>
+  <li>Consider running a linter to check code against suggested styling and coding best practices.</li>
+  <li>Possible areas for review from running a linting process:
+    <ul>
+      <li><code class="highlighter-rouge">ln 3</code> Use a (% literal) <code class="highlighter-rouge">@board = %w[0 1 2 3 4 5 6 7 8]</code> for an array of strings.</li>
+      <li>Consider single-quoted strings unless string interpolation is needed.</li>
+      <li>Consider the length of a line. Example <code class="highlighter-rouge">ln 10</code>.</li>
+      <li>Reconsider <code class="highlighter-rouge">get_</code> prefix as a method name. <code class="highlighter-rouge">ln 23</code> and <code class="highlighter-rouge">ln 52</code>. This may cause confusion as to the “purpose” of the method. Is it a “getter” method? Maybe <code class="highlighter-rouge">obtain_human_move</code> and <code class="highlighter-rouge">obtain_best_move</code>?</li>
+      <li><code class="highlighter-rouge">ln 86</code> Extra empty line.</li>
+      <li><code class="highlighter-rouge">ln 88</code> thru <code class="highlighter-rouge">ln 94</code> 2 space indentation (not 0) for expression spanning multiple lines.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Example of <code class="highlighter-rouge">ln 85 - ln 95</code> restyled:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">def</span> <span class="nf">game_is_over</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">]].</span><span class="nf">uniq</span><span class="p">.</span><span class="nf">length</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span>
+      <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">5</span><span class="p">]].</span><span class="nf">uniq</span><span class="p">.</span><span class="nf">length</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span>
+      <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">8</span><span class="p">]].</span><span class="nf">uniq</span><span class="p">.</span><span class="nf">length</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span>
+      <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">6</span><span class="p">]].</span><span class="nf">uniq</span><span class="p">.</span><span class="nf">length</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span>
+      <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">7</span><span class="p">]].</span><span class="nf">uniq</span><span class="p">.</span><span class="nf">length</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span>
+      <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">8</span><span class="p">]].</span><span class="nf">uniq</span><span class="p">.</span><span class="nf">length</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span>
+      <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">8</span><span class="p">]].</span><span class="nf">uniq</span><span class="p">.</span><span class="nf">length</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span>
+      <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">6</span><span class="p">]].</span><span class="nf">uniq</span><span class="p">.</span><span class="nf">length</span> <span class="o">==</span> <span class="mi">1</span>
+  <span class="k">end</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="code">CODE</h2>
+
+<h3 id="concerns">Concerns</h3>
+
+<ul>
+  <li>Is it possinble to narrow the focus of the following methods? Can these methods be refactored to a single responsibility?
+    <ul>
+      <li><code class="highlighter-rouge">start_game</code> (ln 10 &amp; ln 18) Extract the drawing of the board to its own method. Benefit: DRY. Any future changes to the board can now be done in one place.</li>
+      <li>
+        <p><code class="highlighter-rouge">eval_board</code> Extract the “strategies” to their own methods. This may be come more critical as the need to meet the game objective of “undefeatable” computer is addressed. Will you attempt to create a hierarchy of ordered strategies or use an algorithm such as “minimax”? (Considering the arguments being passed from <code class="highlighter-rouge">eval_board</code> and the parameters being accepted by <code class="highlighter-rouge">get_best_move</code>, it looks like “minimax”.)</p>
+      </li>
+      <li><code class="highlighter-rouge">ln 42</code> Is there a need to pass the <code class="highlighter-rouge">@com</code> argument? It does not appear so at this point in the development/functionality of the game. The same question for <code class="highlighter-rouge">ln 52</code>. <code class="highlighter-rouge">next_player</code>, <code class="highlighter-rouge">depth</code>, and <code class="highlighter-rouge">best_score</code>.</li>
+      <li><code class="highlighter-rouge">get_human_spot</code> (ln 23) Extract the validation of an open square to its own method. As mentioned prior (Gameplay concerns), the game would benefit from validating if the chosen sqaure is in the range of the board (0- 8). Validate if the move is in range, if so, validate if the square is available.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><code class="highlighter-rouge">get_human_spot</code> refactored:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">def</span> <span class="nf">get_human_spot</span>
+    <span class="nb">print</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">==&gt; Please choose a square [0-8]: "</span>
+    <span class="n">spot</span> <span class="o">=</span> <span class="n">validate_move</span><span class="p">(</span><span class="nb">gets</span><span class="p">.</span><span class="nf">chomp</span><span class="p">)</span>
+    <span class="n">board</span><span class="p">[</span><span class="n">spot</span><span class="p">]</span> <span class="o">=</span> <span class="n">hum</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">validate_move</span><span class="p">(</span><span class="n">spot</span><span class="p">)</span>
+    <span class="kp">loop</span> <span class="k">do</span>
+      <span class="k">break</span> <span class="k">if</span> <span class="n">valid_move?</span><span class="p">(</span><span class="n">spot</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">valid_open_square?</span><span class="p">(</span><span class="n">spot</span><span class="p">.</span><span class="nf">to_i</span><span class="p">)</span>
+      <span class="nb">print</span> <span class="s1">'??? - Please choose a valid square: '</span>
+      <span class="n">spot</span> <span class="o">=</span> <span class="nb">gets</span><span class="p">.</span><span class="nf">chomp</span>
+    <span class="k">end</span>
+    <span class="n">spot</span><span class="p">.</span><span class="nf">to_i</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">valid_move?</span><span class="p">(</span><span class="n">spot</span><span class="p">)</span>
+    <span class="n">spot</span><span class="p">.</span><span class="nf">between?</span><span class="p">(</span><span class="s1">'0'</span><span class="p">,</span> <span class="s1">'8'</span><span class="p">)</span>
+  <span class="k">end</span>
+</code></pre></div></div>
+
+<h3 id="considerations">Considerations</h3>
+
+<ul>
+  <li>Hide instance variables, consider “getters” and/or “setters” for instance variables.
+    <ul>
+      <li><code class="highlighter-rouge">attr_reader :board, :com, :hum</code></li>
+    </ul>
+  </li>
+  <li>Consider referencing squares by player rather than markers. Easier updates if changes are made to markers. <code class="highlighter-rouge">ln 27</code>, <code class="highlighter-rouge">ln 43</code>, <code class="highlighter-rouge">ln 56</code> and <code class="highlighter-rouge">ln 98</code>.
+    <ul>
+      <li><code class="highlighter-rouge">if @board[spot] != com &amp;&amp; @board[spot] != hum</code> (Code as written assumes <code class="highlighter-rouge">attr_reader :com, :hum</code>)</li>
+    </ul>
+  </li>
+  <li>Consider <code class="highlighter-rouge">get_best_move</code>
+    <ul>
+      <li>Are all the parameters necessary? Specifically are they all being used?</li>
+      <li>Consider if <code class="highlighter-rouge">best_move</code> is necessary.</li>
+      <li>Consider if logic for implicit return is necessary. (ln 77 - ln 82)</li>
+      <li>consider extracting out methods for “win” and “block”.</li>
+    </ul>
+  </li>
+  <li>Consider attempting to refactor <code class="highlighter-rouge">get_best_move</code> and <code class="highlighter-rouge">game_over</code> methods to simplify logic.</li>
+</ul>
+
+<hr />
+
+<h2 id="overall">OVERALL</h2>
+
+<p>The game has generally met the objectives set forth. The two immediate needs to satisfy the games desired outcomes are: address input that falls outside the choices for choosing a move, and make the computer unbeatable.</p>
+
+<p>As one of the objectives is to to be “production-ready”, it is worth considering what additional functionality might be desired for the game and if the current design would easily facilitate any future changes. (Some of that additional functionality was outlined in “Gameplay”.)</p>
+
+<p>The current design does utilize <code class="highlighter-rouge">class Game</code> as a “game engine”, but as noted in “<strong>CODE</strong>”, single responsibility principles should be considered. Both the single class and many of the defined methods might benefit from examination to consider if their focus might be narrowed. Would it be rewarding to examine narrowing the responsibility of many of the defined methods as well as creating classes for the players as well as the board? It very well may for a “production ready” version of the game.</p>
+
+    </div>
+  </body>
+
+  <footer class="blog-footer mt-3">
+    <p>&#169; 2019 Harbortop</p>
+    <p>
+      <a href="#">Back to top</a>
+    </p>
+  </footer>
+</html>
