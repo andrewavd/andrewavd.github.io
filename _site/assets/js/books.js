@@ -17,13 +17,14 @@ function displayResults(response, section) {
     titleLink.href = item.volumeInfo.infoLink;
     titleLink.target = OPENNEWTAB;
     titleLink.textContent = item.volumeInfo.title
-    var title = document.createElement("h4");
+
+    var titleTag = document.createElement("h4");
 
     var authorLink = document.createElement("a");
     authorLink.href = item.volumeInfo.infoLink;
     authorLink.target = OPENNEWTAB;
     authorLink.textContent = item.volumeInfo.authors
-    var author = document.createElement("div");
+    var authorTag = document.createElement("div");
 
     var publisherLink = document.createElement("a");
     publisherLink.href = item.volumeInfo.infoLink;
@@ -40,11 +41,11 @@ function displayResults(response, section) {
 
     book.appendChild(document.createElement("hr"));
 
-    book.appendChild(title);
-    title.appendChild(titleLink);
+    book.appendChild(titleTag);
+    titleTag.appendChild(titleLink);
 
-    book.appendChild(author);
-    author.appendChild(authorLink);
+    book.appendChild(authorTag);
+    authorTag.appendChild(authorLink);
 
     book.appendChild(publisher);
     publisher.appendChild(publisherLink);
